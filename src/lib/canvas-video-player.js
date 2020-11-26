@@ -71,8 +71,8 @@ module.exports = {
 		this.resizeTimeoutReference = false;
 		this.RESIZE_TIMEOUT = 1000;
 		this.setCanvasSize = function () {
-			this.width = this.canvas.clientWidth;
-			this.height = this.canvas.clientHeight;
+			this.width = this.canvas.width;
+			this.height = this.canvas.height;
 			this.canvas.setAttribute('width', this.width);
 			this.canvas.setAttribute('height', this.height);
 		};

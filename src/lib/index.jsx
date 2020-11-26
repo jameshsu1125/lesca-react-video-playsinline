@@ -115,7 +115,7 @@ class playsinline_player extends Component {
 			if (UserAgent.Ios.is()) {
 				return (
 					<>
-						<canvas ref='canvas' width={this.props.width || 560} height={this.props.height || 315} />
+						<canvas ref='canvas' width={this.props.width || 560} height={this.props.height || 560} />
 						<video muted ref='video' muted width={this.props.width || 560} height={this.props.height || 315}>
 							{this.append_source()}
 						</video>

@@ -1,6 +1,6 @@
 {
 	"name": "lesca-react-video-playsinline",
-	"version": "0.0.0",
+	"version": "0.1.5",
 	"description": "react component base on html-canvas-video-player",
 	"main": "lib/index.js",
 	"scripts": {
@@ -43,7 +43,7 @@
 		"webpack-dev-server": "^3.1.3"
 	},
 	"author": "jamehsu1125 <jameshsu1125@gmail.com>",
-	"homepage": "https://github.com/jameshsu1125/npm-base-package",
+	"homepage": "https://github.com/jameshsu1125/lesca-react-video-playsinline",
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:jameshsu1125/lesca-react-video-playsinline.git"
