@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './style.less';
 import { CanvasVideoPlayer } from './canvas-video-player';
-import { UserAgent } from 'lesca';
+import { UserAgent, Loading } from 'lesca';
 
 class playsinline_player extends Component {
 	constructor(props) {
 		super(props);
+		this.state = { loading: false };
 	}
 
 	componentDidMount() {
@@ -22,6 +23,28 @@ class playsinline_player extends Component {
 		}, 10);
 
 		if (this.props.hide) this.hide();
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.interval);
+		if (this.video.unbind) this.video.unbind();
+	}
+
+	setSize(w, h) {
+		this.refs.main.style.width = w + 'px';
+		this.refs.main.style.height = h + 'px';
+		if (UserAgent.get() === 'mobile') {
+			if (UserAgent.Ios.is()) {
+				this.video.video.style.width = w + 'px';
+				this.video.video.style.height = h + 'px';
+			} else {
+				this.video.style.width = w + 'px';
+				this.video.style.height = h + 'px';
+			}
+		} else {
+			this.video.style.width = w + 'px';
+			this.video.style.height = h + 'px';
+		}
 	}
 
 	getDom() {
@@ -71,7 +94,7 @@ class playsinline_player extends Component {
 
 		if (this.props.loop) this.video.setAttribute('loop', true);
 		if (this.props.onupdate) {
-			setInterval(() => {
+			this.interval = setInterval(() => {
 				this.props.onupdate(this.video.currentTime, this.video.duration, this.video.readyState);
 			}, 10);
 		}
@@ -89,7 +112,7 @@ class playsinline_player extends Component {
 			hideVideo: true,
 			autoplay: this.props.autoplay || true,
 			audio: this.props.audio || isMute,
-			loop: this.props.loop || true,
+			loop: this.props.loop || false,
 			resetOnLastFrame: false,
 			onend: this.props.onend ? this.props.onend : function () {},
 			onupdate: this.props.onupdate ? this.props.onupdate : function (e, t) {},
@@ -137,6 +160,10 @@ class playsinline_player extends Component {
 		}
 	}
 
+	append_loading() {
+		if (this.state.loading) return <Loading />;
+	}
+
 	render() {
 		return (
 			<div
@@ -147,6 +174,7 @@ class playsinline_player extends Component {
 					height: this.props.height ? this.props.height + 'px' : '315px',
 				}}>
 				{this.append_player()}
+				{this.append_loading()}
 			</div>
 		);
 	}

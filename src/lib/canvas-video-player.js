@@ -139,6 +139,7 @@ module.exports = {
 			window.addEventListener(
 				'resize',
 				(self.cvpHandlers.windowResizeHandler = function () {
+					console.log('a');
 					clearTimeout(self.resizeTimeoutReference);
 					self.resizeTimeoutReference = setTimeout(function () {
 						self.setCanvasSize();
@@ -147,10 +148,10 @@ module.exports = {
 				})
 			);
 			this.unbind = function () {
-				this.canvas.removeEventListener('click', root.cvpHandlers.canvasClickHandler);
-				this.video.removeEventListener('timeupdate', root.cvpHandlers.videoTimeUpdateHandler);
-				this.video.removeEventListener('canplay', root.cvpHandlers.videoCanPlayHandler);
-				window.removeEventListener('resize', root.cvpHandlers.windowResizeHandler);
+				this.canvas.removeEventListener('click', self.cvpHandlers.canvasClickHandler);
+				this.video.removeEventListener('timeupdate', self.cvpHandlers.videoTimeUpdateHandler);
+				this.video.removeEventListener('canplay', self.cvpHandlers.videoCanPlayHandler);
+				window.removeEventListener('resize', self.cvpHandlers.windowResizeHandler);
 				if (this.options.audio) this.audio.parentNode.removeChild(this.audio);
 			};
 			this.updateTimeline = function () {
