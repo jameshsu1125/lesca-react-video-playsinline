@@ -37,6 +37,9 @@ class playsinline_player extends Component {
 			if (UserAgent.Ios.is()) {
 				this.video.video.style.width = w + 'px';
 				this.video.video.style.height = h + 'px';
+				this.video.canvas.width = w;
+				this.video.canvas.height = h;
+				this.video.setCanvasSize();
 			} else {
 				this.video.style.width = w + 'px';
 				this.video.style.height = h + 'px';
