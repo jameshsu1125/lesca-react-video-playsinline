@@ -7,6 +7,10 @@ class playsinline_player extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { loading: false };
+
+		//youtube iframe stand size
+		this.def_width = 560;
+		this.def_height = 315;
 	}
 
 	componentDidMount() {
@@ -62,10 +66,6 @@ class playsinline_player extends Component {
 		this.refs.main.style.display = 'block';
 	}
 
-	jumpTo(v) {
-		this.video.jumpTo(v);
-	}
-
 	pause() {
 		this.video.pause();
 	}
@@ -77,6 +77,7 @@ class playsinline_player extends Component {
 	goto(v) {
 		this.video.goto(v);
 	}
+
 	currentTime() {
 		if (UserAgent.get() === 'mobile') {
 			if (UserAgent.Ios.is()) return this.video.video.currentTime;
@@ -85,7 +86,7 @@ class playsinline_player extends Component {
 	}
 
 	mute(v) {
-		$('video, video').prop('muted', v);
+		//$('video, video').prop('muted', v);
 	}
 
 	add_video_player() {
@@ -118,7 +119,7 @@ class playsinline_player extends Component {
 			loop: this.props.loop || false,
 			resetOnLastFrame: false,
 			onend: this.props.onend ? this.props.onend : function () {},
-			onupdate: this.props.onupdate ? this.props.onupdate : function (e, t) {},
+			onupdate: this.props.onupdate ? this.props.onupdate : function (currentTime, duration, readyState) {},
 		});
 	}
 
@@ -141,8 +142,8 @@ class playsinline_player extends Component {
 			if (UserAgent.Ios.is()) {
 				return (
 					<>
-						<canvas ref='canvas' width={this.props.width || 560} height={this.props.height || 560} />
-						<video muted ref='video' muted width={this.props.width || 560} height={this.props.height || 315}>
+						<canvas ref='canvas' width={this.props.width || this.def_width} height={this.props.height || this.def_height} />
+						<video muted ref='video' muted width={this.props.width || this.def_width} height={this.props.height || this.def_height}>
 							{this.append_source()}
 						</video>
 					</>
@@ -173,8 +174,8 @@ class playsinline_player extends Component {
 				ref='main'
 				className='video-playsinline-player'
 				style={{
-					width: this.props.width ? this.props.width + 'px' : '560px',
-					height: this.props.height ? this.props.height + 'px' : '315px',
+					width: this.props.width ? this.props.width + 'px' : this.def_width + 'px',
+					height: this.props.height ? this.props.height + 'px' : this.def_height + 'px',
 				}}>
 				{this.append_player()}
 				{this.append_loading()}
