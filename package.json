@@ -1,6 +1,6 @@
 {
 	"name": "lesca-react-video-playsinline",
-	"version": "0.1.10",
+	"version": "0.1.11",
 	"description": "react component base on html-canvas-video-player",
 	"main": "lib/index.js",
 	"scripts": {
