@@ -139,7 +139,6 @@ module.exports = {
 			window.addEventListener(
 				'resize',
 				(self.cvpHandlers.windowResizeHandler = function () {
-					console.log('a');
 					clearTimeout(self.resizeTimeoutReference);
 					self.resizeTimeoutReference = setTimeout(function () {
 						self.setCanvasSize();
