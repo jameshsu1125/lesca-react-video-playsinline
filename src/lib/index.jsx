@@ -20,9 +20,11 @@ class playsinline_player extends Component {
 		} else this.add_video_player();
 
 		this.timer = setInterval(() => {
-			if (this.refs.video.readyState == 4) {
-				if (this.props.ready) this.props.ready();
-				clearInterval(this.timer);
+			if (this.refs.video) {
+				if (this.refs.video.readyState == 4) {
+					if (this.props.ready) this.props.ready();
+					clearInterval(this.timer);
+				}
 			}
 		}, 10);
 
