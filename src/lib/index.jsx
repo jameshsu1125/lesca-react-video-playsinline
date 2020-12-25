@@ -20,12 +20,14 @@ class playsinline_player extends Component {
 		} else this.add_video_player();
 
 		this.timer = setInterval(() => {
-			if (this.refs.video) {
-				if (this.refs.video.readyState == 4) {
-					if (this.props.ready) this.props.ready();
-					clearInterval(this.timer);
+			try {
+				if (this.refs.video) {
+					if (this.refs.video.readyState == 4) {
+						if (this.props.ready) this.props.ready();
+						clearInterval(this.timer);
+					}
 				}
-			}
+			} catch (e) {}
 		}, 10);
 
 		if (this.props.hide) this.hide();
@@ -101,7 +103,9 @@ class playsinline_player extends Component {
 		if (this.props.loop) this.video.setAttribute('loop', true);
 		if (this.props.onupdate) {
 			this.interval = setInterval(() => {
-				this.props.onupdate(this.video.currentTime, this.video.duration, this.video.readyState);
+				try {
+					if (this.video) this.props.onupdate(this.video.currentTime, this.video.duration, this.video.readyState);
+				} catch (e) {}
 			}, 10);
 		}
 		if (this.props.autoplay != false) this.video.play();
