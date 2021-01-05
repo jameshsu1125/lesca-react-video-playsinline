@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './style.less';
-import { CanvasVideoPlayer } from './canvas-video-player';
-import { UserAgent, Loading } from 'lesca';
+import CanvasVideoPlayer from './canvas-video-player';
+import UserAgent from 'lesca-user-agent';
 
-class playsinline_player extends Component {
+export default class playsinline_player extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { loading: false };
 
 		//youtube iframe stand size
 		this.def_width = 560;
@@ -90,7 +89,7 @@ class playsinline_player extends Component {
 	}
 
 	mute(v) {
-		//$('video, video').prop('muted', v);
+		$('video, video').prop('muted', v);
 	}
 
 	add_video_player() {
@@ -170,10 +169,6 @@ class playsinline_player extends Component {
 		}
 	}
 
-	append_loading() {
-		if (this.state.loading) return <Loading />;
-	}
-
 	render() {
 		return (
 			<div
@@ -184,10 +179,7 @@ class playsinline_player extends Component {
 					height: this.props.height ? this.props.height + 'px' : this.def_height + 'px',
 				}}>
 				{this.append_player()}
-				{this.append_loading()}
 			</div>
 		);
 	}
 }
-
-export default playsinline_player;
