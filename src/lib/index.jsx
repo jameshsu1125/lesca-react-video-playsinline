@@ -39,8 +39,13 @@ export default class playsinline_player extends React.Component {
 
 	setURL(u) {
 		const video = this.video.tagName === 'VIDEO' ? this.video : this.video.video;
-		video.src = u;
-		video.play();
+		const source = Array.apply(null, document.querySelectorAll('source'));
+		source.map((e) => {
+			if (e.type === 'video/mp4') {
+				e.setAttribute('src', u);
+				video.load();
+			}
+		});
 	}
 
 	setSize(w, h) {
