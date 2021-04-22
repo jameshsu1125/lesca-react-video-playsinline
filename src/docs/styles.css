@@ -13,3 +13,9 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+button {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+}

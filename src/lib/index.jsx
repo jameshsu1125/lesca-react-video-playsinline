@@ -37,6 +37,12 @@ export default class playsinline_player extends React.Component {
 		if (this.video.unbind) this.video.unbind();
 	}
 
+	setURL(u) {
+		const video = this.video.tagName === 'VIDEO' ? this.video : this.video.video;
+		video.src = u;
+		video.play();
+	}
+
 	setSize(w, h) {
 		this.refs.main.style.width = w + 'px';
 		this.refs.main.style.height = h + 'px';
@@ -148,7 +154,12 @@ export default class playsinline_player extends React.Component {
 				return (
 					<>
 						<canvas ref='canvas' width={this.props.width || this.def_width} height={this.props.height || this.def_height} />
-						<video muted ref='video' muted width={this.props.width || this.def_width} height={this.props.height || this.def_height}>
+						<video
+							muted
+							ref='video'
+							muted
+							width={this.props.width || this.def_width}
+							height={this.props.height || this.def_height}>
 							{this.append_source()}
 						</video>
 					</>
