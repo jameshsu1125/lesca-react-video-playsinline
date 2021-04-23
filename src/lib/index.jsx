@@ -44,6 +44,7 @@ export default class playsinline_player extends React.Component {
 			if (e.type === 'video/mp4') {
 				e.setAttribute('src', u);
 				video.load();
+				if (!UserAgent.Ios.is()) video.play();
 			}
 		});
 	}
@@ -119,7 +120,9 @@ export default class playsinline_player extends React.Component {
 			}, 10);
 		}
 		if (this.props.autoplay != false) this.video.play();
-		this.video.onended = this.props.onend || function () {};
+		const { onend = () => {} } = this.props;
+		this.video.addEventListener('ended', () => onend());
+		//this.video.onended = this.props.onend || function () {};
 	}
 
 	add_canvas_player() {

@@ -14,14 +14,6 @@ export default class Example extends React.Component {
 	}
 
 	click() {
-		// this.refs.myClass.video.src =
-		// 	'https://dlcdnwebimgs.asus.com/files/media/6570DD19-B43C-4496-9A24-53CBFB320D9B/vid/enter/video/20201224_Intro_Video_Mobile.mp4';
-		// this.refs.myClass.video.play();
-		// const video = this.refs.myClass.video.tagName === 'VIDEO' ? this.refs.myClass.video : this.refs.myClass.video.video;
-		// video.src =
-		// 	'https://dlcdnwebimgs.asus.com/files/media/6570DD19-B43C-4496-9A24-53CBFB320D9B/vid/enter/video/20201224_Intro_Video_Mobile.mp4';
-		// video.play();
-
 		this.refs.myClass.setURL(
 			'https://dlcdnwebimgs.asus.com/files/media/6570DD19-B43C-4496-9A24-53CBFB320D9B/vid/enter/video/20201224_Intro_Video_Mobile.mp4'
 		);
@@ -39,6 +31,9 @@ export default class Example extends React.Component {
 					}}
 					width={window.innerWidth}
 					height={window.innerHeight}
+					onend={() => {
+						console.log('a');
+					}}
 				/>
 				<button onClick={this.click.bind(this)}>click</button>
 			</>

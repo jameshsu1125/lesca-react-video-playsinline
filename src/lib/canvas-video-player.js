@@ -85,7 +85,10 @@ module.exports = function (options) {
 		if (rect.width || rect.height || elem.getClientRects().length) {
 			doc = elem.ownerDocument;
 			docElem = doc.documentElement;
-			return { top: rect.top + window.pageYOffset - docElem.clientTop, left: rect.left + window.pageXOffset - docElem.clientLeft };
+			return {
+				top: rect.top + window.pageYOffset - docElem.clientTop,
+				left: rect.left + window.pageXOffset - docElem.clientLeft,
+			};
 		}
 	};
 	this.jumpTo = function () {
@@ -163,7 +166,7 @@ module.exports = function (options) {
 			if (this.options.audio) {
 				this.audio.currentTime = this.video.currentTime;
 				try {
-					this.audio.play();
+					this.audio?.play();
 				} catch {
 					console.log('Autoplay video need remove sound track');
 				}
@@ -175,7 +178,7 @@ module.exports = function (options) {
 		};
 		this.playPause = function () {
 			if (this.playing) this.pause();
-			else this.play();
+			else this?.play();
 		};
 		this.loop = function (argument) {
 			var self = this;
@@ -184,7 +187,8 @@ module.exports = function (options) {
 			if (elapsed >= 1 / this.options.framesPerSecond) {
 				this.video.currentTime = this.video.currentTime + elapsed;
 				this.lastTime = time;
-				if (this.audio && Math.abs(this.audio.currentTime - this.video.currentTime) > 0.3) this.audio.currentTime = this.video.currentTime;
+				if (this.audio && Math.abs(this.audio.currentTime - this.video.currentTime) > 0.3)
+					this.audio.currentTime = this.video.currentTime;
 			}
 			this.options.onupdate(this.video.currentTime, this.video.duration, this.video.readyState);
 			if (this.video.currentTime >= this.video.duration) {
@@ -193,7 +197,7 @@ module.exports = function (options) {
 				if (this.options.resetOnLastFrame === true) this.video.currentTime = 0;
 				if (this.options.loop === true) {
 					this.video.currentTime = 0;
-					this.play();
+					this?.play();
 				}
 			}
 			if (this.playing) {
@@ -208,7 +212,7 @@ module.exports = function (options) {
 			this.ctx.drawImage(this.video, 0, 0, this.width, this.height);
 		};
 		if (self.options.autoplay) {
-			self.play();
+			self?.play();
 		}
 	};
 	this.init();
