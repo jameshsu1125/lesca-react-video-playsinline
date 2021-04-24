@@ -34,7 +34,9 @@ export default class playsinline_player extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.interval);
-		if (this.video.unbind) this.video.unbind();
+		this.video?.unbind?.();
+		const { onend = () => {} } = this.props;
+		this.video.removeEventListener('ended', onend);
 	}
 
 	setURL(u) {
@@ -121,7 +123,8 @@ export default class playsinline_player extends React.Component {
 		}
 		if (this.props.autoplay != false) this.video.play();
 		const { onend = () => {} } = this.props;
-		this.video.addEventListener('ended', () => onend());
+		this.video.removeEventListener('ended', onend);
+		this.video.addEventListener('ended', onend);
 		//this.video.onended = this.props.onend || function () {};
 	}
 
