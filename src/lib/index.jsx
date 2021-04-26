@@ -36,7 +36,7 @@ export default class playsinline_player extends React.Component {
 		clearInterval(this.interval);
 		this.video?.unbind?.();
 		const { onend = () => {} } = this.props;
-		this.video.removeEventListener('ended', onend);
+		this.video?.removeEventListener?.('ended', onend);
 	}
 
 	setURL(u) {
